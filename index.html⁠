@@ -51,7 +51,7 @@
 
     <script>
         const SUPABASE_URL = "https://minkahnqqkilodlbbvlw.supabase.co";
-        const SUPABASE_KEY = "Sb_publishable_xhEmJWSXEaG4fEdR8sLH5g_718YiiXM";
+        const SUPABASE_KEY = "sb_publishable_xhEmJWSXEaG4fEdR8sLH5g_718YiiXM";
         const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
         async function search() {
