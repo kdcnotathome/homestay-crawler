@@ -1,0 +1,33 @@
+import os
+import requests
+from bs4 import BeautifulSoup
+from supabase import create_client, Client
+
+# 請替換成你的 Supabase 資訊
+SUPABASE_URL = "https://minkahnqqkilodlbbvlw.supabase.co
+"
+SUPABASE_KEY = "https://minkahnqqkilodlbbvlw"
+
+# 初始化 Supabase 連線
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+
+def test_insert():
+    print("正在測試寫入資料到 Supabase...")
+    
+    # 測試寫入一筆資料
+    test_data = {
+        "name": "宜蘭綠意包棟Villa",
+        "city": "宜蘭縣",
+        "max_guests": 16,
+        "price": 12000,
+        "has_ktv": True,
+        "has_bbq": True,
+        "has_mahjong": True,
+        "url": "https://example.com/demo-villa"
+    }
+    
+    response = supabase.table("homestays").insert(test_data).execute()
+    print("寫入成功！回傳結果：", response)
+
+if __name__ == "__main__":
+    test_insert()
