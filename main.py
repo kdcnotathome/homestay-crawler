@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from supabase import create_client, Client
 
 SUPABASE_URL = "https://minkahnqqkilodlbbvlw.supabase.co"
-SUPABASE_KEY = "Sb_publishable_xhEmJWSXEaG4fEdR8sLH5g_718YiiXM"
+SUPABASE_KEY = "sb_publishable_xhEmJWSXEaG4fEdR8sLH5g_718YiiXM"
 
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
