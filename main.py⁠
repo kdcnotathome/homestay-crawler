@@ -3,31 +3,61 @@ import requests
 from bs4 import BeautifulSoup
 from supabase import create_client, Client
 
-# 請替換成你的 Supabase 資訊
-SUPABASE_URL = "https://minkahnqqkilodlbbvlw.supabase.co
-"
-SUPABASE_KEY = "https://minkahnqqkilodlbbvlw"
+SUPABASE_URL = "https://minkahnqqkilodlbbvlw.supabase.co"
+SUPABASE_KEY = "Sb_publishable_xhEmJWSXEaG4fEdR8sLH5g_718YiiXM"
 
-# 初始化 Supabase 連線
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
-def test_insert():
-    print("正在測試寫入資料到 Supabase...")
+def crawl_and_save():
+    print("開始抓取與更新包棟民宿資料...")
     
-    # 測試寫入一筆資料
-    test_data = {
-        "name": "宜蘭綠意包棟Villa",
-        "city": "宜蘭縣",
-        "max_guests": 16,
-        "price": 12000,
-        "has_ktv": True,
-        "has_bbq": True,
-        "has_mahjong": True,
-        "url": "https://example.com/demo-villa"
-    }
+    homestays_data = [
+        {
+            "name": "宜蘭綠意包棟 Villa",
+            "city": "宜蘭縣",
+            "max_guests": 20,
+            "price": 16000,
+            "has_ktv": True,
+            "has_bbq": True,
+            "has_mahjong": True,
+            "url": "https://example.com/yilan-villa"
+        },
+        {
+            "name": "南投清境雲海包棟木屋",
+            "city": "南投縣",
+            "max_guests": 12,
+            "price": 12000,
+            "has_ktv": False,
+            "has_bbq": True,
+            "has_mahjong": True,
+            "url": "https://example.com/nantou-cabin"
+        },
+        {
+            "name": "墾丁陽光海景包棟會館",
+            "city": "屏東縣",
+            "max_guests": 16,
+            "price": 18000,
+            "has_ktv": True,
+            "has_bbq": True,
+            "has_mahjong": False,
+            "url": "https://example.com/kenting-resort"
+        },
+        {
+            "name": "苗栗山城星空包棟莊園",
+            "city": "苗栗縣",
+            "max_guests": 10,
+            "price": 9800,
+            "has_ktv": False,
+            "has_bbq": True,
+            "has_mahjong": False,
+            "url": "https://example.com/miaoli-manor"
+        }
+    ]
     
-    response = supabase.table("homestays").insert(test_data).execute()
-    print("寫入成功！回傳結果：", response)
+    for item in homestays_data:
+        supabase.table("homestays").upsert(item).execute()
+        
+    print(f"成功更新 {len(homestays_data)} 筆民宿資料！")
 
 if __name__ == "__main__":
-    test_insert()
+    crawl_and_save()
